@@ -138,9 +138,9 @@ class TransactionBuilder:
         init=False, default_factory=lambda: []
     )
 
-    _withdrawal_script_to_redeemers: List[Tuple[ScriptType, Optional[Redeemer]]] = field(
-        init=False, default_factory=lambda: []
-    )
+    _withdrawal_script_to_redeemers: List[
+        Tuple[ScriptType, Optional[Redeemer]]
+    ] = field(init=False, default_factory=lambda: [])
 
     _inputs_to_scripts: Dict[UTxO, ScriptType] = field(
         init=False, default_factory=lambda: {}
@@ -320,7 +320,9 @@ class TransactionBuilder:
 
         if isinstance(script, UTxO):
             assert script.output.script is not None
-            self._withdrawal_script_to_redeemers.append((script.output.script, redeemer))
+            self._withdrawal_script_to_redeemers.append(
+                (script.output.script, redeemer)
+            )
             self.reference_inputs.add(script)
             self._reference_scripts.append(script.output.script)
         else:
@@ -436,11 +438,11 @@ class TransactionBuilder:
 
     @property
     def redeemers(self) -> List[Redeemer]:
-        return [r for r in self._inputs_to_redeemers.values() if r is not None] + [
-            r for _, r in self._minting_script_to_redeemers if r is not None
-        ] + [
-            r for _, r in self._withdrawal_script_to_redeemers if r is not None
-        ]
+        return (
+            [r for r in self._inputs_to_redeemers.values() if r is not None]
+            + [r for _, r in self._minting_script_to_redeemers if r is not None]
+            + [r for _, r in self._withdrawal_script_to_redeemers if r is not None]
+        )
 
     @property
     def script_data_hash(self) -> Optional[ScriptDataHash]:

@@ -781,7 +781,7 @@ class PlutusData(ArrayCBORSerializable):
         return self.__class__.from_cbor(self.to_cbor_hex())
 
 
-RawDatum = Union[PlutusData, dict, int, bytes, IndefiniteList, RawCBOR, CBORTag]
+RawDatum = Union[PlutusData, dict, int, bytes, list, IndefiniteList, RawCBOR, CBORTag]
 
 
 @dataclass(repr=False)
@@ -910,7 +910,9 @@ class RawPlutusData(CBORSerializable):
         return self.__class__.from_cbor(self.to_cbor_hex())
 
 
-Datum = Union[PlutusData, dict, int, bytes, IndefiniteList, RawCBOR, RawPlutusData]
+Datum = Union[
+    PlutusData, dict, int, bytes, list, IndefiniteList, RawCBOR, RawPlutusData
+]
 """Plutus Datum type. A Union type that contains all valid datum types."""
 
 

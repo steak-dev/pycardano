@@ -846,7 +846,7 @@ class RawPlutusData(CBORSerializable):
 
     @classmethod
     @limit_primitive_type(
-        PlutusData, dict, int, bytes, IndefiniteList, RawCBOR, CBORTag
+        PlutusData, dict, int, bytes, list, IndefiniteList, RawCBOR, CBORTag
     )  # equal to RawDatum parameter list
     def from_primitive(cls: Type[RawPlutusData], value: RawDatum) -> RawPlutusData:
         return cls(value)

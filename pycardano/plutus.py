@@ -784,7 +784,7 @@ class PlutusData(ArrayCBORSerializable):
 RawDatum = Union[PlutusData, dict, int, bytes, list, IndefiniteList, RawCBOR, CBORTag]
 
 
-@dataclass(repr=False)
+@dataclass(repr=True)
 class RawPlutusData(CBORSerializable):
     data: RawDatum
 
@@ -934,7 +934,7 @@ class RedeemerTag(CBORSerializable, Enum):
     SPEND = 0
     MINT = 1
     CERT = 2
-    WITHDRAW = 3
+    WITHDRAWAL = 3
 
     def to_primitive(self) -> int:
         return self.value

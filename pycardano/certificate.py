@@ -5,7 +5,11 @@ from typing import Optional, Tuple, Type, Union
 
 from pycardano.exception import DeserializeException
 from pycardano.hash import PoolKeyHash, ScriptHash, VerificationKeyHash
-from pycardano.serialization import ArrayCBORSerializable, limit_primitive_type, ArrayBase
+from pycardano.serialization import (
+    ArrayCBORSerializable,
+    limit_primitive_type,
+    ArrayBase,
+)
 
 __all__ = [
     "Certificate",

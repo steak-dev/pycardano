@@ -364,7 +364,7 @@ class OgmiosChainContext(ChainContext):
 
                 if not result["value"]["assets"]:
                     tx_out = TransactionOutput(
-                        Address.from_primitive(address),
+                        Address.from_primitive(result["address"]),
                         amount=lovelace_amount,
                         datum_hash=datum_hash,
                         datum=datum,
@@ -382,7 +382,7 @@ class OgmiosChainContext(ChainContext):
                         ] = quantity
 
                     tx_out = TransactionOutput(
-                        Address.from_primitive(address),
+                        Address.from_primitive(result["address"]),
                         amount=Value(lovelace_amount, multi_assets),
                         datum_hash=datum_hash,
                         datum=datum,

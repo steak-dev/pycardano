@@ -293,7 +293,11 @@ class BlockFrostChainContext(ChainContext):
             raise TransactionFailedException(result)
         else:
             for k in vars(result.EvaluationResult):
-                return_val[k] = ExecutionUnits(
+                if k.startswith("withdraw"):
+                    key = "withdrawal" + k[len("withdraw"):]
+                else:
+                    key = k
+                return_val[key] = ExecutionUnits(
                     getattr(result.EvaluationResult, k).memory,
                     getattr(result.EvaluationResult, k).steps,
                 )

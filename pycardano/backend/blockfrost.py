@@ -293,7 +293,7 @@ class BlockFrostChainContext(ChainContext):
             raise TransactionFailedException(result)
         else:
             for k in vars(result.EvaluationResult):
-                if k.startswith("withdraw"):
+                if k.startswith("withdraw") and not k.startswith("withdrawal"):
                     key = "withdrawal" + k[len("withdraw"):]
                 else:
                     key = k
